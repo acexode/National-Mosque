@@ -74,8 +74,10 @@ export class PrayersPage {
       {
        id: 1,
         text: 'First ILocalNotification',
-        at: new Date(new Date().getTime() + 10000),
+        firstAt: new Date(new Date().getTime() + 10000),
         led: 'F37B7B',
+        every: 'day',
+        badge:1,
         sound: 'file://assets/sounds/azan1.mp3',
         
      },
@@ -85,8 +87,9 @@ export class PrayersPage {
      // ,
       led: 'F37B7B',
       sound: "file://assets/sounds/azan1.mp3",
-      //every: 'day',
-      at: new Date(new Date().getTime() + 60000),
+      every: 'day',
+      badge:1,
+      firstAt: new Date(new Date().getTime() + 60000),
       
       
       
@@ -108,8 +111,9 @@ export class PrayersPage {
       }else{
         if(localStorage.getItem('city') !== null){ 
             var mycity = localStorage.getItem('city')         
-            
-            this.geoCode.forwardGeocode(mycity).then(res =>{                        
+            alert('my city is'+mycity)
+            this.geoCode.forwardGeocode(mycity).then(res =>{ 
+              alert(JSON.stringify(res))                       
               this.prayerTime(res[0].latitude,res[0].longitude)             
             })
       }else{

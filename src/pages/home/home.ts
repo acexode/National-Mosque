@@ -111,41 +111,47 @@ export class HomePage {
  }
 
  countryCity(){
-  // this.connect.location().then(val =>{
-  //   if(val){
-  //     this.geo.getCurrentPosition().then((pos)=>{        
-  //       if(this.platform.is('cordova')){
-  //       this.geoCode.reverseGeocode(pos.coords.latitude,pos.coords.longitude).then(res =>{               
-  //         alert(res[0].countryName)
-  //         this.country = res[0].countryName
-  //         this.locality = res[0].locality + ','      
-  //       }).catch(err =>{
-  //         alert(JSON.stringify(err))
-  //       })
-  //     }
-  //   })
+  this.connect.location().then(val =>{
+    if(val){
+      this.geo.getCurrentPosition().then((pos)=>{        
+        if(this.platform.is('cordova')){
+        this.geoCode.reverseGeocode(pos.coords.latitude,pos.coords.longitude).then(res =>{               
+          alert(res[0].countryName)
+          this.country = res[0].countryName
+          this.locality = res[0].locality + ','      
+        }).catch(err =>{
+          alert(JSON.stringify(err))
+        })
+      }
+    })
 
-  //   }else{
-  //     this.locality = localStorage.getItem('myItem')
-  //   }
-  // })
+    }else{
+      this.locality = localStorage.getItem('myItem')
+    }
+  })
   
  }
  goto(page){
    this.navCtrl.push(page)
  }
   getLocation(){   
-      this.geo.getCurrentPosition().then((pos)=>{      
-          this.prayerTime(pos.coords.latitude,pos.coords.longitude)          
-      }).catch(err =>{
-       console.log(err)
-       if(localStorage.getItem('latlng')){
-        var latlng = JSON.parse(localStorage.getItem('latlng'))
-        this.prayerTime(latlng.lat,latlng.lng)
+    this.connect.location().then(val =>{          
+      if(val == true){
+        this.geo.getCurrentPosition().then((pos)=>{      
+         this.prayerTime(pos.coords.latitude,pos.coords.longitude)   
+       }) 
       }else{
-        this.showPrompt()
+        if(localStorage.getItem('city') !== null){ 
+            var mycity = localStorage.getItem('city')         
+            
+            this.geoCode.forwardGeocode(mycity).then(res =>{                        
+              this.prayerTime(res[0].latitude,res[0].longitude)             
+            })
+      }else{
+       this.showPrompt()
+     }
       }
-      })       
+    })      
   }
 
   prayerTime(lat,lng){       
@@ -241,12 +247,10 @@ export class HomePage {
           handler: data => {           
             var mycity = this.toTitleCase(data.City)
             console.log(mycity);
-            this.geoCode.forwardGeocode(mycity).then(res =>{
-              alert(res)
-              localStorage.setItem('latlng', JSON.stringify({lat:res[0].latitude, lng:res[0].longitude}))
-            })
-            
-            this.getLocation()
+            localStorage.setItem('city', mycity)
+            this.geoCode.forwardGeocode(mycity).then(res =>{                           
+              this.prayerTime(res[0].latitude,res[0].longitude)
+            })    
           }
         }
       ]
