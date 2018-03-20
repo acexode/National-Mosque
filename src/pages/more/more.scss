@@ -1,0 +1,24 @@
+page-more {
+    ion-col {
+        margin-bottom: 10px;
+        margin-left: -2px;
+        text-align: center;
+    }
+    .parent {
+        border-radius: 50%;
+        height: 60px;
+        width: 60px;
+        padding-top: 5px;
+        padding-left: 5px;
+        margin: 0px auto;
+    }
+    .round {
+        border-radius: 50%;
+        border: 3px solid #fefefe;
+        height: 50px;
+        width: 50px;
+        color: #fff;
+        padding-top: 10px;
+        font-size: 120%
+    }
+}

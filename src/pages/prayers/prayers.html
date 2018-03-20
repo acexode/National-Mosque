@@ -1,0 +1,49 @@
+<!--
+  Generated template for the PrayersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Prayers</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="card-background-page">
+    <ion-card class="bg" style="background-image:linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(assets/imgs/cm.jpg)">
+        <div class="sunmoon">
+
+            <div class="sun-times">
+                <div class="sun-path">
+                    <div class="sun-animation"></div>
+                </div>
+                <div class="sun-symbol-path"><span class="symbol">☀</span></div>
+            </div>
+            <div class="legend">
+                <div class="sunrise">Shurook {{shurook}}</div>
+                <div class="sunset">Maghrib {{maghrib}}</div>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </div>
+
+    </ion-card>
+
+
+    <ion-list>
+        <ion-item tappable class="date">
+            <p class="date"> <b>{{hijri}}</b></p>
+            <p class="date"> {{greg}}</p>
+        </ion-item>
+        <div #allPrayers>
+            <ion-item tappable class="prayers {{time.class}}" *ngFor="let time of fivePrayer">
+                <ion-label class="pTitle ">{{time.title}}</ion-label>
+                <span class="time" item-end>{{time.time}}</span>
+                <ion-toggle checked="{{time.checked}}"></ion-toggle>
+            </ion-item>
+        </div>
+    </ion-list>
+</ion-content>

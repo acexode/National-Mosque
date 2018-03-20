@@ -1,0 +1,32 @@
+page-mosque {
+    #map {
+        height: 200px
+    }
+    .places {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    img {
+        width: 100%;
+    }
+    ion-label {
+        white-space: inherit;
+    }
+    #please-connect {
+        position: absolute;
+        background-color: #000;
+        opacity: 0.5;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+    }
+    #please-connect p {
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        position: relative;
+        font-size: 1.6em;
+        top: 30%;
+    }
+}

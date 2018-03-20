@@ -1,0 +1,22 @@
+<!--
+  Generated template for the AdkharPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color='primary'>
+        <ion-title>Adkhar</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item (click)="goTo(dua.id)" *ngFor="let dua of duas|reverse ; let i = index ">
+            {{i+1}}. {{dua.title}}
+        </ion-item>
+    </ion-list>
+</ion-content>

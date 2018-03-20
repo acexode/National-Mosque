@@ -1,0 +1,32 @@
+page-qibla {
+    object {
+        width: 100%;
+        min-height: 100%;
+    }
+    #siteloader {
+        height: 99%;
+    }
+    #home-menu-icons {
+        display: none
+    }
+    ion-title {
+        $text-color: #943e19;
+    }
+    .desktop[_ngcontent-c7] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        -webkit-justify-content: center;
+        justify-content: center;
+        height: 50vh;
+        text-align: center;
+    }
+    .desktop[_ngcontent-c7] .header[_ngcontent-c7] {
+        display: none;
+    }
+    .logo_wrapper {
+        display: none
+    }
+}

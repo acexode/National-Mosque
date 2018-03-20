@@ -1,3 +1,89 @@
 page-home {
-
+    .card-background-page {
+        button {
+            position: relative;
+        }
+        ion-card {
+            position: relative;
+            text-align: center;
+            margin: 0px;
+            width: 100%;
+        }
+        .card2 {
+            padding: 10px;
+        }
+        .card-md {
+            border-radius: 0px
+        }
+        .header {
+            background: linear-gradient( rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('assets/imgs/cm.jpg');
+            background-size: contain;
+            background-position: top center;
+            background-clip: unset;
+            height: 200px;
+        }
+        .card-title {
+            position: absolute;
+            top: 36%;
+            font-size: 2.0em;
+            width: 100%;
+            font-weight: bold;
+            color: #fff;
+        }
+        .card-subtitle {
+            font-size: 1.0em;
+            position: absolute;
+            width: 100%;
+            color: #fff;
+        }
+        .prayer {
+            top: 52%;
+            text-transform: uppercase;
+        }
+        .location {
+            top: 22%;
+            text-align: left;
+            left: 9%;
+        }
+        .next-prayer {
+            top: 15%;
+            text-align: left;
+            left: 9%;
+        }
+        .clock {
+            top: 16%;
+            text-align: left;
+            /* margin: 5px; */
+            left: 2%;
+            font-size: 126%;
+        }
+        ion-col {
+            margin-bottom: 10px;
+            margin-left: -2px;
+            text-align: center;
+        }
+        .parent {
+            border-radius: 50%;
+            height: 60px;
+            width: 60px;
+            padding-top: 5px;
+            padding-left: 5px;
+            margin: 0px auto;
+        }
+        .round {
+            border-radius: 50%;
+            border: 3px solid #fefefe;
+            height: 50px;
+            width: 50px;
+            color: #fff;
+            padding-top: 10px;
+            font-size: 120%
+        }
+        p {
+            margin-left: -1px;
+        }
+        .card-3 {
+            margin-top: 10px;
+        }
+    }
 }

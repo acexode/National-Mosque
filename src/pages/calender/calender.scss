@@ -1,0 +1,63 @@
+.calender {
+    background: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../assets/imgs/cm.jpg');
+    background-size: cover;
+    background-position: top;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 36px;
+    padding-top: 36px;
+    color: #fff !important;
+}
+
+#calendar-container {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-family: Arial;
+    margin: 20px auto;
+    background-image: linear-gradient(to bottom right, #af4f52, #ee6e73);
+}
+
+#calendar-container>div {
+    padding: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#calendar-month-year,
+#Gregcalendar-month-year {
+    color: #fff;
+}
+
+#calendar-dates>table>tr>td {
+    padding: 7px;
+}
+
+#calendar-dates {
+    height: 200px;
+    overflow: hidden
+}
+
+button {
+    position: absolute;
+}
+
+.left {
+    float: left;
+    left: -15px;
+}
+
+.right {
+    float: right;
+    right: -15px;
+}
+
+.today {
+    color: #ee6e73;
+    background: #fff;
+    border-radius: 50%
+}

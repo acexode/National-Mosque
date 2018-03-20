@@ -1,0 +1,38 @@
+<!--
+  Generated template for the MosquePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Mosque</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+
+
+<ion-content>
+
+    <div #map id="map">
+
+    </div>
+    <div *ngIf="pleaseConnect" id="please-connect">
+        <p>Please connect to the Internet...</p>
+    </div>
+    <ion-list class="places">
+        <ion-item (click)="initMap(place.vicinity)" tappable *ngFor="let place of places">
+            <ion-avatar item-start>
+                <img src="{{place.icon}}">
+            </ion-avatar>
+            <h2>{{place.name}}</h2>
+            <p>{{place.vicinity}}</p>
+        </ion-item>
+    </ion-list>
+    <!-- <ion-spinner></ion-spinner> -->
+    <!-- (touchstart)="selectPlace(place)" -->
+
+</ion-content>

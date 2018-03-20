@@ -1,0 +1,48 @@
+<!--
+  Generated template for the QuotesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color='primary'>
+        <ion-title>Quotes</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="galleryType">
+            <ion-segment-button value="quotes">
+                Quotes
+            </ion-segment-button>
+            <ion-segment-button value="favourites">
+                Favourites
+            </ion-segment-button>
+
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+
+    <div [ngSwitch]="galleryType">
+        <!-- Responsive Layout with Ion Grid-->
+        <div class="images" *ngSwitchCase="'quotes'">
+            <div class="one-image" *ngFor="let image of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]">
+                <img src="assets/gallery/{{image}}.jpeg">
+            </div>
+        </div>
+
+        <!-- More Pinterest floating gallery style -->
+        <div class="images" *ngSwitchCase="'favourites'">
+            <div class="one-image" *ngFor="let image of [2,4,6,8,10,12,14,16,18]">
+                <img src="assets/gallery/{{image}}.jpeg">
+            </div>
+        </div>
+
+    </div>
+
+</ion-content>

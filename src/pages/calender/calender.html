@@ -1,0 +1,35 @@
+<!--
+  Generated template for the CalenderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Islamic Calendar</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="calender" padding>
+
+    <div id="calendar-container">
+        <ion-card-header>
+            <div id="calendar-header">
+                <button class="left" ion-button (click)="decrease()">
+                <ion-icon name="arrow-dropleft"></ion-icon>
+            </button>
+                <span text-center id="calendar-month-year"></span>
+                <button class="right" ion-button (click)="increase()">
+                <ion-icon name="arrow-dropright"></ion-icon>
+            </button>
+            </div>
+        </ion-card-header>
+        <div id="calendar-dates">
+        </div>
+    </div>
+
+
+</ion-content>

@@ -1,0 +1,119 @@
+page-prayers {
+    .card-background-page {
+        ion-card {
+            position: relative;
+            text-align: center;
+            margin: 0px;
+            width: 100%;
+        }
+        .card-md {
+            border-radius: 0px
+        }
+        .bg {
+            background: linear-gradient( rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/imgs/cm.jpg');
+            background-size: cover;
+            background-position: top center;
+            margin: 0;
+            width: 100%;
+            color: #fff;
+            height: 200px;
+            padding-left: 36px;
+            padding-top: 36px;
+        }
+        .prayers {
+            padding-left: 0px;
+        }
+        .sunmoon {
+            position: relative;
+            left: 10px;
+        }
+        .sunmoon>div {
+            margin-left: 10px;
+        }
+        .sun-times {
+            margin-top: 40px;
+            width: 230px;
+            height: 60px;
+            border-bottom: 1px solid #999;
+            overflow-y: hidden;
+        }
+        .sun-times .sun-path {
+            margin-left: 25px;
+            width: 170px;
+            height: 170px;
+            overflow: hidden;
+            border: 1px dashed #999;
+            border-radius: 50%;
+        }
+        .sun-times .sun-symbol-path {
+            position: absolute;
+            color: yellow;
+            text-shadow: 0 0 5px black;
+            height: 85px;
+            -webkit-transition: -webkit-transform 2s linear;
+            -webkit-transform-origin: 50% 100%;
+            -webkit-transform: rotateZ(-75deg);
+            left: 110px;
+            bottom: 0;
+        }
+        .sun-times .sun-symbol-path .symbol {
+            position: relative;
+            font-size: 16px;
+            top: -8px;
+        }
+        .sun-times .sun-animation {
+            width: 0px;
+            height: 150px;
+            background-color: rgba(255, 255, 0, 0.4);
+            -webkit-transition: width 2s linear;
+            transition: width 2s linear;
+        }
+        .legend {
+            position: absolute;
+            bottom: 1em;
+        }
+        .legend>div {
+            position: absolute;
+            font-size: 12px;
+            width: 55px;
+        }
+        .legend .sunrise {
+            left: 15px;
+        }
+        .legend .sunset {
+            left: 185px;
+        }
+        body {
+            background-image: url(foo);
+            background-color: #ccc;
+            font-family: Helvetica, Sans serif;
+        }
+        body h2 {
+            font-size: 20px;
+        }
+        .controls {
+            margin-top: 50px;
+        }
+        .pTitle {
+            text-transform: capitalize;
+            padding-left: 10px;
+        }
+        .time {
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            padding-top: 13px;
+        }
+        .active {
+            background: #f37b7b !important;
+            display: block;
+            color: #fff
+        }
+        .date {
+            text-align: center;
+        }
+        .sunrise,
+        .sunset {
+            text-transform: uppercase;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+page-surah {
+    .item-md {
+        padding: 0;
+    }
+    .surah {
+        font-family: 'Open Sans Condensed', sans-serif;
+    }
+    .arabicVerseText {
+        font-size: 250%;
+        padding-left: 16px;
+        direction: rtl;
+        text-align: justify
+    }
+    .enText {
+        direction: ltr !important;
+        padding-left: 5px;
+        font-size: 120%;
+        text-align: justify
+    }
+    h1 {}
+    .englishName {
+        color: #ee6e73
+    }
+    ion-label {
+        white-space: inherit;
+    }
+}

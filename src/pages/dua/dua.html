@@ -1,0 +1,29 @@
+<!--
+  Generated template for the DuaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color='primary'>
+        <ion-title>Dua</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <h1> {{title | decode}}</h1>
+    <ion-card *ngFor="let dua of duas; let i = index">
+        <ion-card-header>
+            <p class="arabic">{{dua.arabic | decode}}</p>
+        </ion-card-header>
+        <ion-card-content>
+
+
+            <p>{{dua.transliteration}}</p> <br>
+            <p>{{dua.meaning | decode}}</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
