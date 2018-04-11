@@ -32,6 +32,7 @@ export class AzanProvider {
   convertJulian(){
     return prayer.julian(2018,2,19)
   }
+  
 }
 
 

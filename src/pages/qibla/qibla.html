@@ -7,13 +7,65 @@
 <ion-header>
 
     <ion-navbar color='primary'>
-        <ion-title>qibla</ion-title>
+        <ion-title>Qibla</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <div id="siteloader"></div>
+    <ion-card id="map-canvas">
+
+
+    </ion-card>
+    <ion-card>
+        <div class="desc">
+            <p>Latitude : {{lat}}</p>
+            <p>Longitude : {{long}}</p>
+            <p>Qibla Heading : {{heading}}° </p>
+        </div>
+        <div class="compass">
+            <div class="compass-main">
+
+                <!--  Rótulos | Labels -->
+                <span class="north-label">N</span>
+                <span class="east-label">E</span>
+                <span class="west-label">W</span>
+                <span class="south-label">S</span>
+                <!-- Rosa dos Ventos | Compass Rose -->
+                <div class="compass-rose">
+
+                    <!-- Pontos Cardiais | Cardial Points -->
+                    <div class="cardial-points">
+                        <div class="north-pointer pointer"></div>
+                        <div class="east-pointer pointer"></div>
+                        <div class="west-pointer pointer"></div>
+                        <div class="south-pointer pointer"></div>
+                    </div>
+
+                    <!-- Pontos Ordinais | Ordinal Points -->
+                    <div class="ordinal-points">
+                        <div class="northeast-pointer"></div>
+                        <div class="northwest-pointer"></div>
+                        <div class="southeast-pointer"></div>
+                        <div class="south-west-pointer"></div>
+                    </div>
+                </div>
+
+                <!-- Bt Center -->
+                <div class="bt-center"></div>
+
+                <!-- Agulha Magnética | Dip Needle -->
+                <div class="dip-needle"></div>
+
+            </div>
+
+        </div>
+
+
+
+    </ion-card>
+
+
 
 </ion-content>

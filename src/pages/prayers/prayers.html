@@ -38,7 +38,7 @@
             <p class="date"> <b>{{hijri}}</b></p>
             <p class="date"> {{greg}}</p>
         </ion-item>
-        <div #allPrayers>
+        <div class='allPrayers'>
             <ion-item tappable class="prayers {{time.class}}" *ngFor="let time of fivePrayer">
                 <ion-label class="pTitle ">{{time.title}}</ion-label>
                 <span class="time" item-end>{{time.time}}</span>

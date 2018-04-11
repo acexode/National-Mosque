@@ -3,8 +3,8 @@ import { BrowserModule, } from '@angular/platform-browser';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation';
 
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Network } from '@ionic-native/network';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -14,14 +14,17 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ConnectionProvider } from '../providers/connection/connection';
-import { GmapProvider } from '../providers/gmap/gmap';
-import { AzanProvider } from '../providers/azan/azan';
 
+import { AzanProvider } from '../providers/azan/azan';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 import { QuranProvider } from '../providers/quran/quran';
 import { HttpClient,HttpClientModule  } from '@angular/common/http';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { NativeStorage } from '@ionic-native/native-storage';
+import { HelperProvider } from '../providers/helper/helper';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { FileOpener } from '@ionic-native/file-opener';
 
 @NgModule({
   declarations: [
@@ -48,16 +51,19 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LocalNotifications,
     ConnectionProvider,
-    GmapProvider,
     Geolocation,
     Network,
     AzanProvider,
     QuranProvider,
     NativeGeocoder,
-    HttpClient,
-    InAppBrowser,
-    ScreenOrientation,
-    Diagnostic 
+    HttpClient,      
+    Diagnostic,
+    HelperProvider,
+    SocialSharing,
+    FileTransfer,  FileTransferObject,
+    File,FileOpener,
+    DeviceOrientation,
+    NativeStorage 
   ]
 })
 export class AppModule {}

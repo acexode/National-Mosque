@@ -20,6 +20,8 @@ export class QuranPage {
     public navCtrl: NavController, 
     public quran: QuranProvider, 
     public navParams: NavParams) {
+
+      this.surahs = this.quran.getSurahs()
   }
   // "number": 1,
   // "name": "سورة الفاتحة",
@@ -31,7 +33,7 @@ export class QuranPage {
     console.log('ionViewDidLoad QuranPage');
     console.log(this.quran.go())
     
-      this.surahs = this.quran.getSurahs()
+      
       console.log(this.surahs)
    
   }

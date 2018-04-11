@@ -9,6 +9,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 //import HijriDate,{toHijri} from 'hijri-date/lib/safe';
 declare var UQCal
+
 /**
  * Generated class for the PrayersPage page.
  *
@@ -56,7 +57,7 @@ export class PrayersPage {
     public azan: AzanProvider,
     public geo: Geolocation,
     public geoCode: NativeGeocoder,
-    private localNotifications: LocalNotifications,
+    
     public alertCtrl: AlertController,
     public connect: ConnectionProvider) {
   }
@@ -69,39 +70,10 @@ export class PrayersPage {
     console.log(HijriDate);
     const nowGreg = new Date();   
     this.hijri = HijriDate.Hday + ' ' + this.months[HijriDate.Hmonth] + ' ' + HijriDate.Hyear
-    this.greg = nowGreg.toDateString()
-    this.localNotifications.schedule([
-      {
-       id: 1,
-        text: 'First ILocalNotification',
-        firstAt: new Date(new Date().getTime() + 10000),
-        led: 'F37B7B',
-        every: 'day',
-        badge:1,
-        sound: 'file://assets/sounds/azan1.mp3',
-        
-     },
-     {
-      id: 2,
-      text: 'Second ILocalNotification',
-     // ,
-      led: 'F37B7B',
-      sound: "file://assets/sounds/azan1.mp3",
-      every: 'day',
-      badge:1,
-      firstAt: new Date(new Date().getTime() + 60000),
-      
-      
-      
-      
-   }
-    ]);
+    this.greg = nowGreg.toDateString();   
     
   } 
-  ionViewDidEnter() {
-    this.getLocation()
-  }
-  
+
   getLocation(){     
     this.connect.location().then(val =>{          
       if(val == true){
@@ -111,9 +83,9 @@ export class PrayersPage {
       }else{
         if(localStorage.getItem('city') !== null){ 
             var mycity = localStorage.getItem('city')         
-            alert('my city is'+mycity)
+            //alert('my city is'+mycity)
             this.geoCode.forwardGeocode(mycity).then(res =>{ 
-              alert(JSON.stringify(res))                       
+              //alert(JSON.stringify(res))                       
               this.prayerTime(res[0].latitude,res[0].longitude)             
             })
       }else{
@@ -258,7 +230,7 @@ export class PrayersPage {
     setInterval(()=>{
      if(time > arr[1] && time < arr[2]){
       $('.sunmoon .sun-animation').css('width', '25%');
-      $('.sun-symbol-path').css('-webkit-transform', 'rotateZ(6deg)');
+      $('.sun-symbol-path').css('-webkit-transform', 'rotateZ(-30deg)');
      }
      else if(time > arr[2] && time < arr[3]){
       $('.sunmoon .sun-animation').css('width', '50%');

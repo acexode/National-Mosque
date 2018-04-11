@@ -69,6 +69,18 @@ export class MorePage {
       bg: '#42f4df',
       page: 'TasbihPage'
     },
+    {
+      title: 'Makkah Live',
+      icon: 'videocam',
+      bg: '#f53d3d',
+      page: 'VideosPage'
+    },
+    {
+      title: 'Saved',
+      icon: 'bookmark',
+      bg: '#FFC300',
+      page: 'BookmarkPage'
+    },
   ]
   
   constructor(public navCtrl: NavController, public navParams: NavParams) {

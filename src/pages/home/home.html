@@ -84,7 +84,10 @@
     </ion-card>
     <ion-card class="card-3">
         <ion-card-header>
-            Picture of the Day
+            <button (click)='share(pictureoftheday)' ion-item>
+                <ion-icon name="share" item-end></ion-icon>
+                Picture of the Day
+              </button>
         </ion-card-header>
         <ion-card-content>
             <img src="{{pictureoftheday}}" />

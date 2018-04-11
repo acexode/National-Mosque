@@ -2,10 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { AzanProvider } from '../../providers/azan/azan';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+// import {Transfer, TransferObject} from '@ionic-native/transfer';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { ConnectionProvider } from '../../providers/connection/connection';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { HelperProvider } from '../../providers/helper/helper';
+import { SocialSharing } from '@ionic-native/social-sharing';
+declare var cordova;
 //import { PrayersPage } from '../prayers/prayers';
 /**
  * Generated class for the HomePage page.
@@ -20,7 +25,7 @@ import { ConnectionProvider } from '../../providers/connection/connection';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  pictureoftheday
+  pictureoftheday  
   slideone = [
     {
       title: 'Prayer Times',
@@ -69,8 +74,7 @@ export class HomePage {
       icon: 'at',
       bg: '#f89b33',
       page: 'AsmaPage'
-    },
-   
+    },   
   ]
   slidetwo = [
     {
@@ -79,7 +83,26 @@ export class HomePage {
       bg: '#42f4df',
       page: 'TasbihPage'
     },
+    {
+      title: 'Settings',
+      icon: 'cog',
+      bg: '#1d61f3',
+      page: 'SettingsPage'
+    },
+    {
+      title: 'Makkah Live',
+      icon: 'videocam',
+      bg: '#f53d3d',
+      page: 'VideosPage'
+    },
+    {
+      title: 'Saved',
+      icon: 'bookmark',
+      bg: '#FFC300',
+      page: 'BookmarkPage'
+    },
   ]
+  storageDirectory: string = '';
   prayers
   date
   country
@@ -90,6 +113,7 @@ export class HomePage {
   toMinutes = []
   nextPrayerTitle 
   nextPrayerTime   
+  fileTransfer: FileTransferObject = this.ft.create();
   constructor(     
     public navParams: NavParams,
     public navCtrl: NavController,
@@ -97,17 +121,37 @@ export class HomePage {
     public geo: Geolocation,
     public platform: Platform,
     public connect: ConnectionProvider,
-    public geoCode: NativeGeocoder,    
+    private localNotifications: LocalNotifications,
+    public geoCode: NativeGeocoder,  
+    public helper: HelperProvider,  
+    public ft: FileTransfer,
+    public file: File,
+    public socialShare: SocialSharing,    
     public alertCtrl: AlertController   
   ) {
+   // this.storageDirectory = cordova.file.dataDirectory;
   }
- 
+  
   ionViewDidLoad() {
+  
     var rand = Math.floor((Math.random() * 18) + 1)
-    this.countryCity()
-    this.getLocation()  
+    //this.countryCity()
+    //this.getLocation() 
+    if(this.platform.is('cordova')){
+      this.getLocation()
+      this.countryCity()
+    } else{
+       this.geo.getCurrentPosition().then((pos)=>{      
+         this.prayerTime(pos.coords.latitude,pos.coords.longitude)   
+       }) 
+       
+    }
     this.pictureoftheday = `assets/gallery/${rand}.jpeg` 
     console.log('ionViewDidLoad HomePage');
+    var d = new Date();
+    d.setHours(19,47,0);
+   
+    
  }
 
  countryCity(){
@@ -116,7 +160,7 @@ export class HomePage {
       this.geo.getCurrentPosition().then((pos)=>{        
         if(this.platform.is('cordova')){
         this.geoCode.reverseGeocode(pos.coords.latitude,pos.coords.longitude).then(res =>{               
-          alert(res[0].countryName)
+         
           this.country = res[0].countryName
           this.locality = res[0].locality + ','      
         }).catch(err =>{
@@ -155,15 +199,15 @@ export class HomePage {
   }
 
   prayerTime(lat,lng){       
-     var Minutes = this.currTime()  
+     var Minutes = this.helper.currTime()  
      console.log(lat,lng)
         this.prayers = this.azan.getPrayers([lat,lng],'MWL')
        
        this.pNames = Object.keys(this.prayers).splice(1, 4).concat(Object.keys(this.prayers).splice(6, 2))
          
         var vals =  (<any>Object).values(this.prayers).splice(1, 4).concat( (<any>Object).values(this.prayers).splice(6, 2))
-        this.toMinutes= [].concat.apply([],this.splitTime(vals))
-        
+        this.toMinutes= [].concat.apply([],this.helper.splitTime(vals))
+        this.helper.forAlert(vals)        
         var temp = []
         this.pNames.map((name,index,arr)=>{
           if(Minutes < this.toMinutes[index]){
@@ -183,47 +227,8 @@ export class HomePage {
           
         })
    } 
-
-  currTime() {
-    var currdate = new Date()
-    return (currdate.getHours() * 60) + (currdate.getMinutes())
-  }
-  splitTime(data){   
-    var conv = data.map((val,i,all) =>{
-       var v1 = val.split(":")[0]
-       var v2 = val.split(":")[1]
-       var v22 = v2.split(" ")
-
-       var arr = []
-      if(v22[1] == "am"){
-        var x = (parseInt(v1)*60)+parseInt(v2)
-           arr.push(x)
-      }else{
-       
-        if(all[i].split(":")[0] == 12){
-          var y = (parseInt(v1)*60)+parseInt(v2)          
-         arr.push(y)
-        } else{
-          var z = ((parseInt(v1)+12)*60)+parseInt(v2)          
-          arr.push(z)
-        }    
-       
-      }
-      
-       return arr
-    })
-   return conv
-  }
-  mapObj(name){   
-    var min   
-     Object.keys(this.prayers).map((data,i,arr) =>{      
-      if(arr.indexOf(name[i])> -1){
-        console.log(data)
-        min = this.splitTime(data)
-      } 
-    })
-   return min
-  }
+  
+  
   
   showPrompt() {
     let prompt = this.alertCtrl.create({
@@ -245,7 +250,7 @@ export class HomePage {
         {
           text: 'Save',
           handler: data => {           
-            var mycity = this.toTitleCase(data.City)
+            var mycity = this.helper.toTitleCase(data.City)
             console.log(mycity);
             localStorage.setItem('city', mycity)
             this.geoCode.forwardGeocode(mycity).then(res =>{                           
@@ -256,11 +261,65 @@ export class HomePage {
       ]
     });
     prompt.present();
-  }
+  }  
+ 
+  share(url) {   
+    let imagePath = url;
+    var n = imagePath.lastIndexOf("/");
+    var imageName = imagePath.substr(n+1);
+    const ROOT_DIRECTORY = 'file:///sdcard//';
+    const downloadFolderName = 'tempDownloadFolder'; 
+    this.file.createDir(ROOT_DIRECTORY, downloadFolderName, true)
+    .then((entries) => {
+      this.file.copyFile(this.file.applicationDirectory + "www/assets/gallery/", imageName, ROOT_DIRECTORY + downloadFolderName + '//', imageName)
+      .then(entries =>{
+        this.socialShare.share('National Mosque','Quote of the day', ROOT_DIRECTORY + downloadFolderName + "/" + imageName, imageName)
+              .then((entries) => {
+                console.log('success ' + JSON.stringify(entries));
+              })
+              .catch((error) => {
+                alert('error ' + JSON.stringify(error));
+              });
+      }).catch((error) => {
+        alert('error ' + JSON.stringify(error));
+      });
 
-  toTitleCase(str)
-  {
-      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-  }
+    }).catch((error) => {
+      alert('error ' + JSON.stringify(error));
+    });
+    // this.platform.ready().then(() => {
+    //   var str = url;
+    // var n = str.lastIndexOf("/");
+    // var image = str.substr(n+1);
+    // const fileTransfer: FileTransferObject = this.ft.create();
+    // const imageLocation = `${cordova.file.applicationDirectory}www/assets/gallery/${image}`;
+    // this.socialShare.share('National Mosque','Quote of the day','file://assets/gallery/1.jpeg',null)
+    
+    // fileTransfer.download(imageLocation, this.storageDirectory + image).then((entry) => {
 
+    //     // const alertSuccess = this.alertCtrl.create({
+    //     //   title: `Download Succeeded!`,
+    //     //   subTitle: `${image} was successfully downloaded to: ${entry.toURL()}`,
+    //     //   buttons: ['Ok']
+    //     // });
+
+    //     // alertSuccess.present();
+    //     this.socialShare.share('National Mosque','Quote of the day',entry.toURL(),null)
+
+    //   }, (error) => {
+    //     console.log(error)
+    //     const alertFailure = this.alertCtrl.create({
+    //       title: `Download Failed!`,
+    //       subTitle: `${image} was not successfully downloaded. Error code: ${error.code}`,
+    //       buttons: ['Ok']
+    //     });
+
+    //     alertFailure.present();
+
+    //   });
+
+   // });
+
+  }
+ 
 }

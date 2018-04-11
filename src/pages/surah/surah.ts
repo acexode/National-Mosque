@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 import { QuranProvider } from '../../providers/quran/quran';
-
+import { NativeStorage } from '@ionic-native/native-storage';
 
 /**
  * Generated class for the SurahPage page.
@@ -21,34 +21,18 @@ export class SurahPage {
   englishName
   name
   text
+  bookmarked = []
   constructor(
     public navCtrl: NavController,
     public quran: QuranProvider,
     public loadCtrl:LoadingController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public NativeStore: NativeStorage) 
+     {
   }
-  //Sample data
-  // data": {
-  //   "number": 114,
-  //   "name": "سورة الناس",
-  //   "englishName": "An-Naas",
-  //   "englishNameTranslation": "Mankind",
-  //   "revelationType": "Meccan",
-  //   "numberOfAyahs": 6,
-  //   "ayahs": [
-  //   {
-  //   "number": 6231,
-  //   "audio": "http://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6231",
-  //   "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
-  //   "numberInSurah": 1,
-  //   "juz": 30,
-  //   "manzil": 7,
-  //   "page": 604,
-  //   "ruku": 556,
-  //   "hizbQuarter": 240,
-  //   "sajda": false
-  //   },
+  
   ionViewDidLoad() {
+    
     console.log('ionViewDidLoad SurahPage');
     this.getSurah()
     this.getSurahEn()
@@ -76,6 +60,13 @@ export class SurahPage {
     this.text = this.quran.getSurahEn(this.number).ayahs    
      console.log(this.text)
   
+  }
+  bookmark(name,ar,en,surahIndex){
+         
+      this.bookmarked.push({surah:name,ar:ar,en:en,index:surahIndex})
+      this.NativeStore.setItem('bookmark'+name, JSON.stringify(this.bookmarked))
+       
+   
   }
   
 

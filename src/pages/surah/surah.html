@@ -17,7 +17,11 @@
 
 <ion-content>
     <ion-list class="surah">
+
         <ion-item *ngFor="let ayah of ayahs; let i =index" tappable>
+            <div (click)="bookmark(englishName,ayah.text, text[i].text, text[i].numberInSurah)" class="bookmark">
+                <ion-icon name="bookmark" item-end></ion-icon>
+            </div>
             <h1 class="arabicVerseText"> {{ ayah.text }}</h1>
             <p class="enText"> {{text[i].numberInSurah }}. {{ text[i].text }}</p>
 
