@@ -10,13 +10,13 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Geolocation } from '@ionic-native/geolocation';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { Badge } from '@ionic-native/badge';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ConnectionProvider } from '../providers/connection/connection';
 
 import { AzanProvider } from '../providers/azan/azan';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+
 import { File } from '@ionic-native/file';
 import { QuranProvider } from '../providers/quran/quran';
 import { HttpClient,HttpClientModule  } from '@angular/common/http';
@@ -25,7 +25,9 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { HelperProvider } from '../providers/helper/helper';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { FileOpener } from '@ionic-native/file-opener';
-
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Screenshot } from '@ionic-native/screenshot';
+import { SettingsProvider } from '../providers/settings/settings';
 @NgModule({
   declarations: [
     MyApp,   
@@ -59,11 +61,14 @@ import { FileOpener } from '@ionic-native/file-opener';
     HttpClient,      
     Diagnostic,
     HelperProvider,
-    SocialSharing,
-    FileTransfer,  FileTransferObject,
+    SocialSharing,    
     File,FileOpener,
     DeviceOrientation,
-    NativeStorage 
+    NativeStorage ,
+    PhotoViewer,
+    Screenshot,
+    SettingsProvider,
+    Badge
   ]
 })
 export class AppModule {}

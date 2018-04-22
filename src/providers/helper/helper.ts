@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Platform } from 'ionic-angular';
+import { ConnectionProvider } from '../../providers/connection/connection';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Events,AlertController } from 'ionic-angular';
+import cities from 'cities.json';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 declare var cordova;
 /*
   Generated class for the HelperProvider provider.
@@ -11,7 +16,9 @@ declare var cordova;
 @Injectable()
 export class HelperProvider {
 
-  constructor(public notify: LocalNotifications, public plt: Platform) {
+  constructor(
+    
+    public notify: LocalNotifications, public plt: Platform) {
     console.log('Hello HelperProvider Provider');
   }
 
@@ -140,6 +147,7 @@ export class HelperProvider {
       ]);
      }
   }
+
  
 
 }

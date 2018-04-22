@@ -1,5 +1,5 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, Events, Platform } from 'ionic-angular';
 import { AzanProvider } from '../../providers/azan/azan';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as $ from 'jquery'
@@ -57,44 +57,52 @@ export class PrayersPage {
     public azan: AzanProvider,
     public geo: Geolocation,
     public geoCode: NativeGeocoder,
-    
+    public events: Events,
+    public platform: Platform,
     public alertCtrl: AlertController,
     public connect: ConnectionProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PrayersPage');    
-    this.getLocation()  
-    var cal = new UQCal()
-    var HijriDate = cal.convert();
-    console.log(HijriDate);
-    const nowGreg = new Date();   
-    this.hijri = HijriDate.Hday + ' ' + this.months[HijriDate.Hmonth] + ' ' + HijriDate.Hyear
-    this.greg = nowGreg.toDateString();   
-    
-  } 
-
-  getLocation(){     
-    this.connect.location().then(val =>{          
-      if(val == true){
-        this.geo.getCurrentPosition().then((pos)=>{      
+    console.log('ionViewDidLoad PrayersPage');   
+   
+    this.convertGtH()
+    //get latlng from event  
+    if(this.platform.is('cordova')){
+      this.events.subscribe('latlng',(lat,lng)=>{
+        alert(lat + ', '+ lng)
+        this.prayerTime(lat,lng)    
+      })    
+     
+    } else{
+      // for browser
+       this.geo.getCurrentPosition().then((pos)=>{      
          this.prayerTime(pos.coords.latitude,pos.coords.longitude)   
        }) 
-      }else{
-        if(localStorage.getItem('city') !== null){ 
-            var mycity = localStorage.getItem('city')         
-            //alert('my city is'+mycity)
-            this.geoCode.forwardGeocode(mycity).then(res =>{ 
-              //alert(JSON.stringify(res))                       
-              this.prayerTime(res[0].latitude,res[0].longitude)             
-            })
-      }else{
-       this.showPrompt()
-     }
-      }
-    })
-   
+       
+    }
+    
+  } 
+ /**
+  * Convert greg calender to hijri
+  * 
+  * Displays hijri date month and year 
+  * 
+  * Displays greg date month and year 
+  */
+  convertGtH(){
+    var cal = new UQCal()
+    var HijriDate = cal.convert();    
+    const nowGreg = new Date();   
+    this.hijri = HijriDate.Hday + ' ' + this.months[HijriDate.Hmonth] + ' ' + HijriDate.Hyear
+    this.greg = nowGreg.toDateString(); 
   }
+
+ /**
+  * 
+  * @param lat 
+  * @param lng 
+  */
   prayerTime(lat,lng){        
      var Minutes = this.currTime()  
         this.prayers = this.azan.getPrayers([lat,lng],'MWL')
@@ -140,7 +148,9 @@ export class PrayersPage {
         console.log(this.maghrib)
    } 
 
-   // current time
+  /**
+   * return total minutes from midnight
+   */
   currTime() {
     var currdate = new Date()
     return (currdate.getHours() * 60) + (currdate.getMinutes())
@@ -185,44 +195,19 @@ export class PrayersPage {
    return min
   }
   
-  // get city manually
-  showPrompt() {
-    let prompt = this.alertCtrl.create({
-      title: 'City',
-      message: "Enable Location on your device or input your current city",
-      inputs: [
-        {
-          name: 'City',
-          placeholder: 'City'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {           
-            var mycity = this.toTitleCase(data.City)
-            console.log(mycity);
-            localStorage.setItem('city', mycity)
-            this.geoCode.forwardGeocode(mycity).then(res =>{                           
-              this.prayerTime(res[0].latitude,res[0].longitude)
-            })        
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
-
+  
+/**
+ * convert string to title case
+ * @param str 
+ */
   toTitleCase(str)
   {
       return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   }
+  /**
+   * Sunrise widget
+   * @param arr 
+   */
   sunrise(arr){
     console.log(arr)
     var time = this.currTime()

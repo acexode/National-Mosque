@@ -76,6 +76,12 @@ export class MorePage {
       page: 'VideosPage'
     },
     {
+      title: 'Popular',
+      icon: 'star',
+      bg: '#663399',
+      page: 'PopularPage'
+    },
+    {
       title: 'Saved',
       icon: 'bookmark',
       bg: '#FFC300',

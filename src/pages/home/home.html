@@ -75,9 +75,6 @@
                 </ion-grid>
             </ion-slide>
 
-            <ion-slide style="background-color: red">
-                <h2>Slide 3</h2>
-            </ion-slide>
 
         </ion-slides>
 
@@ -90,7 +87,7 @@
               </button>
         </ion-card-header>
         <ion-card-content>
-            <img src="{{pictureoftheday}}" />
+            <img (click)='view(pictureoftheday)' src="{{pictureoftheday}}" />
 
         </ion-card-content>
 

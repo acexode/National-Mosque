@@ -16,14 +16,26 @@
 
 
 <ion-content>
+    <ion-card class="img" class="do">
+        <img id="textScreenshot" src="">
+    </ion-card>
+    <ion-card id="cap" class="module cap">
+        <h2 class="ar">{{ar}}</h2>
+        <p class="">{{en}} <br><br> {{info}}
+        </p>
+
+    </ion-card>
     <ion-list class="surah">
 
-        <ion-item *ngFor="let ayah of ayahs; let i =index" tappable>
-            <div (click)="bookmark(englishName,ayah.text, text[i].text, text[i].numberInSurah)" class="bookmark">
-                <ion-icon name="bookmark" item-end></ion-icon>
+
+        <ion-item id="share{{i}}" (click)="clicked" *ngFor="let ayah of ayahs; let i =index" tappable>
+            <div *ngIf='show' class="bookmark">
+                <ion-icon (click)="bookmark(englishName,ayah.text, text[i].text, text[i].numberInSurah)" name="bookmark" item-end></ion-icon>
+                <!-- <ion-icon (click)="share(englishName,ayah.text, text[i].text, text[i].numberInSurah,i)" name="share" item-end></ion-icon>
+             -->
             </div>
             <h1 class="arabicVerseText"> {{ ayah.text }}</h1>
-            <p class="enText"> {{text[i].numberInSurah }}. {{ text[i].text }}</p>
+            <p id='p' class="enText"> {{text[i].numberInSurah }}. {{ text[i].text }}</p>
 
         </ion-item>
     </ion-list>

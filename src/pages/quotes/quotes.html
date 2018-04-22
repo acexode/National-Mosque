@@ -31,7 +31,7 @@
     <div [ngSwitch]="galleryType">
         <!-- Responsive Layout with Ion Grid-->
         <div class="images" *ngSwitchCase="'quotes'">
-            <div class="one-image" *ngFor="let image of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]">
+            <div class="one-image" (click)='view(image)' *ngFor="let image of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]">
                 <img src="assets/gallery/{{image}}.jpeg">
             </div>
         </div>

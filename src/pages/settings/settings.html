@@ -6,13 +6,36 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>settings</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>settings</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-list>
+        <h5>GPS Location</h5>
+        <ion-item class="gps" *ngFor="let item of items" (click)="itemSelected(item.title)">
 
+
+            <p>{{item.action}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-list no-lines>
+        <h5>Prayer Time Options</h5>
+        <ion-item tappable *ngFor="let item of calc" (click)="itemSelected(item.title)">
+            <h2>{{item.title}}</h2><br>
+
+            <p>{{item.action}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-list no-lines class="lists">
+        <h5>Support</h5>
+        <ion-item t *ngFor="let item of about" (click)="itemSelected(item.title)">
+            <h2>{{item.title}}</h2><br>
+
+
+        </ion-item>
+    </ion-list>
 </ion-content>

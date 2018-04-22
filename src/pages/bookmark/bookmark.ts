@@ -15,7 +15,26 @@ import { NativeStorage } from '@ionic-native/native-storage';
 })
 export class BookmarkPage {
   allBookmarks = []
+  keys = []
   constructor(public navCtrl: NavController,public NativeStore: NativeStorage) {
+    this.NativeStore.keys().then(val =>{
+      this.keys.push(val)  
+     
+      for(let i =0; i <this.keys[0].length; i++){
+        var name = this.keys[0][i].substr(0,8)
+       
+        if(name == 'bookmark'){
+          this.NativeStore.getItem(this.keys[0][i]).then(val=>{
+            
+            this.allBookmarks.push(JSON.parse(val))
+            this.allBookmarks = this.allBookmarks.reduce((acc, val) => acc.concat(val), []);
+           
+          })
+          
+        }
+        
+      }
+    })
    
     // for(let i =0; i < localStorage.length; i++){
     //   this.allBookmarks.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
@@ -29,9 +48,8 @@ export class BookmarkPage {
 
   ionViewDidLoad() {
    
-    this.NativeStore.keys().then(val =>{
-      alert(val)
-    })
+    
+    //alert(JSON.stringify(this.keys))
   }
 
 }
