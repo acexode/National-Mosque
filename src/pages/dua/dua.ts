@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DecodePipe } from '../../pipes/decode/decode';
+
 
 /**
  * Generated class for the DuaPage page.

@@ -13,14 +13,16 @@ import { Badge } from '@ionic-native/badge';
 export class MyApp {
   rootPage:any = TabsPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,settings:SettingsProvider,private badge: Badge) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,settings:SettingsProvider,badge: Badge) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      //if(localStorage.getItem('calcmethod'))
      if(platform.is('cordova')){
         settings.getLocation(); 
         settings.countryCity();
         badge.clear()
+        
      }
       statusBar.backgroundColorByHexString('#a34c50');
       splashScreen.hide();

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams,Events,AlertController } from 'ioni
 import { ConnectionProvider } from '../../providers/connection/connection';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HelperProvider } from '../../providers/helper/helper';
-import cities from 'cities.json';
+//import cities from 'cities.json';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 /**
  * Generated class for the SettingsPage page.

@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Platform } from 'ionic-angular';
-import { ConnectionProvider } from '../../providers/connection/connection';
-import { Geolocation } from '@ionic-native/geolocation';
-import { Events,AlertController } from 'ionic-angular';
-import cities from 'cities.json';
-import { NativeGeocoder } from '@ionic-native/native-geocoder';
+
 declare var cordova;
 /*
   Generated class for the HelperProvider provider.
@@ -78,7 +74,6 @@ export class HelperProvider {
     month = date.getMonth(),
     day = date.getDate(),
     fajr = new Date(year,month,day,arr[0].h,arr[0].m),
-    shurook = new Date(year,month,day,arr[1].h,arr[1].m),
     dhur = new Date(year,month,day,arr[2].h,arr[2].m),
     asr = new Date(year,month,day,parseInt(arr[3].h)+12,arr[3].m),
     magrib = new Date(year,month,day,parseInt(arr[4].h)+12,arr[4].m),

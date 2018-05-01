@@ -100,7 +100,7 @@ export class SurahPage {
     url(${this.bg})`
     document.getElementById('cap').style.backgroundSize = `cover`
     
-    var id = 'share'+index
+    //var id = 'share'+index
     this.show = false
     this.ar = ar
     this.en = en

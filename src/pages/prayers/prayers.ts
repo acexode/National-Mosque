@@ -6,7 +6,7 @@ import * as $ from 'jquery'
 //import cities from 'cities.json';
 import { ConnectionProvider } from '../../providers/connection/connection';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+
 //import HijriDate,{toHijri} from 'hijri-date/lib/safe';
 declare var UQCal
 
@@ -68,11 +68,11 @@ export class PrayersPage {
    
     this.convertGtH()
     //get latlng from event  
+    
     if(this.platform.is('cordova')){
-      this.events.subscribe('latlng',(lat,lng)=>{
-        alert(lat + ', '+ lng)
-        this.prayerTime(lat,lng)    
-      })    
+      
+      var storedCity = JSON.parse(localStorage.getItem('mycity'))
+      this.prayerTime(storedCity[0].lat,storedCity[0].lng)  
      
     } else{
       // for browser
@@ -105,7 +105,9 @@ export class PrayersPage {
   */
   prayerTime(lat,lng){        
      var Minutes = this.currTime()  
-        this.prayers = this.azan.getPrayers([lat,lng],'MWL')
+     var method = localStorage.getItem('calcmethod')
+     
+        this.prayers = this.azan.getPrayers([lat,lng],method)
         let checked = [true,true,false,false,true,true] 
        this.pNames = Object.keys(this.prayers).splice(1, 4).concat(Object.keys(this.prayers).splice(6, 2))
          

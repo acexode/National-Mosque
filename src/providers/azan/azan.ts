@@ -17,7 +17,7 @@ export class AzanProvider {
   }
 
   getPrayers(latLng, method?){        
-      console.log(latLng)
+      console.log(latLng,method)
       if(method){
         prayer.setMethod(method)    
       }else{

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Platform,Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,  Platform,Events } from 'ionic-angular';
 import { AzanProvider } from '../../providers/azan/azan';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -7,11 +7,10 @@ import { File } from '@ionic-native/file';
 // import {Transfer, TransferObject} from '@ionic-native/transfer';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { ConnectionProvider } from '../../providers/connection/connection';
-import { LocalNotifications } from '@ionic-native/local-notifications';
 import { HelperProvider } from '../../providers/helper/helper';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
-declare var cordova;
+
 //import { PrayersPage } from '../prayers/prayers';
 /**
  * Generated class for the HomePage page.
@@ -86,7 +85,7 @@ export class HomePage {
  
   constructor(     
     public navParams: NavParams, public navCtrl: NavController, public azan: AzanProvider, public geo: Geolocation,
-    public platform: Platform, public connect: ConnectionProvider, private localNotifications: LocalNotifications, public geoCode: NativeGeocoder,  
+    public platform: Platform, public connect: ConnectionProvider,  public geoCode: NativeGeocoder,  
     public helper: HelperProvider, public events: Events, public viewer: PhotoViewer, public file: File,
     public socialShare: SocialSharing,           
   ) {
@@ -136,8 +135,9 @@ export class HomePage {
  */
   prayerTime(lat,lng){       
      var Minutes = this.helper.currTime()  
-     console.log(lat,lng)
-        this.prayers = this.azan.getPrayers([lat,lng],'MWL')
+     
+     var method = localStorage.getItem('calcmethod')
+     this.prayers = this.azan.getPrayers([lat,lng],method)
        
        this.pNames = Object.keys(this.prayers).splice(1, 4).concat(Object.keys(this.prayers).splice(6, 2))
          

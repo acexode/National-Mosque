@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConnectionProvider } from '../../providers/connection/connection';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -30,17 +30,15 @@ export class SettingsProvider {
     this.connect.location().then(val =>{
       if(val){
         this.geo.getCurrentPosition().then((pos)=>{        
-          if(this.platform.is('cordova')){
-            alert('from countrycity latitude '+pos.coords.latitude)
-          this.geoCode.reverseGeocode(pos.coords.latitude,pos.coords.longitude).then(res =>{   
-            alert('from countrycity '+res[0].countryName)            
+          if(this.platform.is('cordova')){           
+          this.geoCode.reverseGeocode(pos.coords.latitude,pos.coords.longitude).then(res =>{                   
             this.events.publish('locality',res[0].countryName,res[0].locality)
                 
           }).catch(err =>{
             if(err){
               this.showPrompt()
             }
-            alert('from countrycity '+JSON.stringify(err))
+            //alert('from countrycity '+JSON.stringify(err))
           })
         }
       })
@@ -56,13 +54,10 @@ export class SettingsProvider {
          this.events.publish('latlng',pos.coords.latitude,pos.coords.longitude)   
        }) 
       }else{
-        if(localStorage.getItem('city') !== null){ 
-           
-            var mycity = localStorage.getItem('city')         
-            alert('from' +' '+mycity)
+        if(localStorage.getItem('city') !== null){            
+            var mycity = localStorage.getItem('city')      
             this.geoCode.forwardGeocode(mycity).then(res =>{                        
-              this.events.publish('latlng',res[0].latitude,res[0].longitude)  
-              alert('from settings' +' '+res[0].longitude)            
+              this.events.publish('latlng',res[0].latitude,res[0].longitude)             
             }).catch(err =>{
               if(err){
                 this.showPrompt()
@@ -97,19 +92,17 @@ export class SettingsProvider {
           text: 'Save',
           handler: data => {           
             var mycity = this.helper.toTitleCase(data.City)
+            mycity = mycity.trim()
             console.log(mycity);
             localStorage.setItem('city', mycity)
             let city = cities.filter(place =>{
                 return place.name == mycity
             })
-            alert(city[0])
-            this.events.publish('latlng',city[0].lat,city[0].lng)
-            this.events.publish('locality',city[0].country,city[0].name)
-            // this.geoCode.forwardGeocode(mycity).then(res =>{                           
-            //   this.events.publish(res[0].latitude,res[0].longitude)
-            // }).catch(err =>{
-
-            // })    
+            localStorage.setItem('mycity', JSON.stringify(city))
+            var storedCity = JSON.parse(localStorage.getItem('mycity'))
+            this.events.publish('latlng',storedCity[0].lat,storedCity[0].lng)
+            this.events.publish('locality',storedCity[0].country,storedCity[0].name)
+              
           }
         }
       ]
