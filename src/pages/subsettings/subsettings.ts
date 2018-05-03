@@ -27,9 +27,13 @@ export class SubsettingsPage {
     {method:'Karachi',fajr:'18°',isha:'18°' },
     {method:'Tehran',fajr:'17.7°',isha:'14°' },
     {method:'Jafari',fajr:'16°',isha:'14°' }] 	
-    jurists;
+    jurists = ['Standard	(Shafii, Maliki, Jafari and Hanbali)','Hanafi'];
   Juristic;
   method = localStorage.getItem('calcmethod')
+  juristFormControl= new FormControl(this.jurists[0])
+  juristForm = new FormGroup({
+    'juristFormControl': this.juristFormControl
+  })
   CalcmethodFormControl = new FormControl(this.method)
   CalcmethodForm = new FormGroup({
     'CalcmethodFormControl': this.CalcmethodFormControl

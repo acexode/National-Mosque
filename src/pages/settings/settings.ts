@@ -22,14 +22,15 @@ items= [
   {title: 'GPS Location', action:'Edit Location'},
   
  ]
+ method = localStorage.getItem('calcmethod')
 calc= [
-  {title: 'Calculation Method', action:'Default'},
+  {title: 'Calculation Method', action:this.method},
   {title: 'Juristic Method', action:'Default'},
 ]
 about= [
   {title: 'Introduction', action:''},
-  {title: 'Follow us on Twitter', action:''},
-  {title: 'Like us on Facebook', action:''},
+  {title: 'Follow us on Twitter', action:'https://twitter.com/abdulsid1'},
+  {title: 'Like us on Facebook', action:'https://web.facebook.com/abudawuda'},
   {title: 'Share this App', action:''},
 ]
   constructor(

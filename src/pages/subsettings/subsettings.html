@@ -44,5 +44,16 @@
 
 </ion-content>
 <ion-content *ngIf="title== juris " padding>
+    <form [formGroup]="juristForm">
+        <ion-list radio-group formControlName="juristFormControl">
 
+            <ion-item *ngFor="let method of jurists; let i =index">
+                <ion-label>{{method}}
+
+                </ion-label>
+                <ion-radio (ionSelect)="doSubmit($event)" [value]=" method "></ion-radio>
+            </ion-item>
+
+        </ion-list>
+    </form>
 </ion-content>

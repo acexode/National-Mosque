@@ -33,10 +33,21 @@ export class SettingsProvider {
           if(this.platform.is('cordova')){           
           this.geoCode.reverseGeocode(pos.coords.latitude,pos.coords.longitude).then(res =>{                   
             this.events.publish('locality',res[0].countryName,res[0].locality)
-                
+            var city = [
+              {
+                lat:pos.coords.latitude,lng:pos.coords.longitude,
+                country:res[0].countryName, name:res[0].locality
+              }]    
+              localStorage.setItem('mycity', JSON.stringify(city))
           }).catch(err =>{
             if(err){
-              this.showPrompt()
+              if(localStorage.getItem('mycity') !== null){
+                var storedCity = JSON.parse(localStorage.getItem('mycity'))
+                this.events.publish('latlng',storedCity[0].lat,storedCity[0].lng)
+                this.events.publish('locality',storedCity[0].country,storedCity[0].name)
+              }else{
+                this.showPrompt()
+              }
             }
             //alert('from countrycity '+JSON.stringify(err))
           })
@@ -60,7 +71,10 @@ export class SettingsProvider {
               this.events.publish('latlng',res[0].latitude,res[0].longitude)             
             }).catch(err =>{
               if(err){
-                this.showPrompt()
+                console.log(err)
+                  this.showPrompt()
+                
+                
               }
               //alert('err from setting '+err)
             })

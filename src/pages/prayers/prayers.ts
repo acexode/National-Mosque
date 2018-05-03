@@ -62,13 +62,16 @@ export class PrayersPage {
     public alertCtrl: AlertController,
     public connect: ConnectionProvider) {
   }
-
+  ionViewDidEnter() {
+    this.getData()
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PrayersPage');   
-   
     this.convertGtH()
     //get latlng from event  
-    
+    this.getData()
+  } 
+  getData(){
     if(this.platform.is('cordova')){
       
       var storedCity = JSON.parse(localStorage.getItem('mycity'))
@@ -81,8 +84,7 @@ export class PrayersPage {
        }) 
        
     }
-    
-  } 
+  }
  /**
   * Convert greg calender to hijri
   * 

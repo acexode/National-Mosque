@@ -92,15 +92,22 @@ export class HomePage {
 
   }
   
+  ionViewDidEnter() {
+    this.events.subscribe('latlng',(lat,lng)=>{
+       
+      this.prayerTime(lat,lng)    
+    })
+  }
+
   ionViewDidLoad() {
     this.dailyQuotes()    
     if(this.platform.is('cordova')){
       this.events.subscribe('latlng',(lat,lng)=>{
-        alert('from home' +' '+lat)
+       
         this.prayerTime(lat,lng)    
       })
       this.events.subscribe('locality',(country,locality)=>{
-        alert('from home events '+country)
+       
         this.country = country
         this.locality = locality + ','   
       })
