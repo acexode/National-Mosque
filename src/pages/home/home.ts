@@ -11,6 +11,7 @@ import { HelperProvider } from '../../providers/helper/helper';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 
+
 //import { PrayersPage } from '../prayers/prayers';
 /**
  * Generated class for the HomePage page.

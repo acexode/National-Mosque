@@ -89,5 +89,6 @@
     <plugin name="cordova-android-support-gradle-release" spec="^1.4.1">
         <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
     </plugin>
+    <plugin name="cordova-plugin-badge" spec="^0.8.7" />
     <engine name="browser" spec="~5.0.3" />
 </widget>

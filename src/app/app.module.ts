@@ -26,7 +26,7 @@ import { HelperProvider } from '../providers/helper/helper';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { FileOpener } from '@ionic-native/file-opener';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
-import { Screenshot } from '@ionic-native/screenshot';
+//import { Screenshot } from '@ionic-native/screenshot';
 import { SettingsProvider } from '../providers/settings/settings';
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { SettingsProvider } from '../providers/settings/settings';
     DeviceOrientation,
     NativeStorage ,
     PhotoViewer,
-    Screenshot,
+   // Screenshot,
     SettingsProvider,
     Badge
   ]

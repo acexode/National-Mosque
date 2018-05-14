@@ -10,8 +10,13 @@ page-settings {
         border-bottom: 1px solid #ccc;
     }
     h2,
+    a,
     h5,
     p {
         padding-left: 15px;
+    }
+    a {
+        text-decoration: none;
+        color: #000;
     }
 }

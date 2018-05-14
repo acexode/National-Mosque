@@ -63,6 +63,7 @@ export class PrayersPage {
     public connect: ConnectionProvider) {
   }
   ionViewDidEnter() {
+    console.log(this.fivePrayer)
     this.getData()
   }
   ionViewDidLoad() {
@@ -110,6 +111,7 @@ export class PrayersPage {
      var method = localStorage.getItem('calcmethod')
      
         this.prayers = this.azan.getPrayers([lat,lng],method)
+        console.log(this.prayers)
         let checked = [true,true,false,false,true,true] 
        this.pNames = Object.keys(this.prayers).splice(1, 4).concat(Object.keys(this.prayers).splice(6, 2))
          
@@ -125,6 +127,7 @@ export class PrayersPage {
               console.log(name)            
               this.nextPrayerTitle=  name
               this.nextPrayerTime=  this.prayers[name]
+             
               this.fivePrayer.push({time: this.prayers[name], title: name,checked:checked[index],class:'active' })
             }else{
               this.fivePrayer.push({time: this.prayers[name], title: name,checked:checked[index],class:'not-active' })
@@ -148,8 +151,11 @@ export class PrayersPage {
         })
         this.shurook = this.fivePrayer[1].time
         this.maghrib = this.fivePrayer[4].time
+        if(this.fivePrayer.length > 6){
+          this.fivePrayer = this.fivePrayer.slice(this.fivePrayer.length - 6)
+        }
         console.log(this.shurook)
-        console.log(this.maghrib)
+   
    } 
 
   /**

@@ -27,5 +27,7 @@ export class MyApp {
       statusBar.backgroundColorByHexString('#a34c50');
       splashScreen.hide();
     });
+   
   }
+ 
 }

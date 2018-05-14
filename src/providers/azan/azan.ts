@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
-import prayer from 'prayer'
-
+//import * as Times from 'islamic-prayer-times'
+declare var PrayTimes
 /*
   Generated class for the AzanProvider provider.
 
@@ -10,27 +10,30 @@ import prayer from 'prayer'
 */
 @Injectable()
 export class AzanProvider {
-
+   prayTimes = new PrayTimes();
+  
   constructor() {
     console.log('Hello AzanProvider Provider');
+  
+  
     
   }
 
   getPrayers(latLng, method?){        
       console.log(latLng,method)
       if(method){
-        prayer.setMethod(method)    
+        this.prayTimes.setMethod(method)    
       }else{
-        prayer.setMethod('MWL') 
+        this.prayTimes.setMethod('MWL') 
       }
       var date = new Date()
       var tz:any = date.toTimeString().split(" ")[1].split("+")[1]
-      return prayer.getTimes(new Date(), latLng, (tz/100))
+      return this.prayTimes.getTimes(new Date(), latLng, (tz/100))
    
   }
 
   convertJulian(){
-    return prayer.julian(2018,2,19)
+    return this.prayTimes.julian(2018,2,19)
   }
   
 }

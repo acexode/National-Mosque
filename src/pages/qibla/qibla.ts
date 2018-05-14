@@ -47,9 +47,12 @@ export class QiblaPage {
  // data can be a set of coordinates, or an error (if an error occurred).
       this.lat = pos.coords.latitude
       this.long= pos.coords.longitude
-      this.heading = Math.round(this.getBearing(this.klat,this.klong,this.lat,this.long))
+      this.heading = this.getBearing(this.klat,this.klong,this.lat,this.long)
     
       if(this.plt.is('cordova')){
+        this.deviceOrientation.getCurrentHeading().catch(err =>{
+          alert(JSON.stringify(err))
+        })
           this.deviceOrientation.watchHeading().subscribe(
         (data: DeviceOrientationCompassHeading) => 
         {

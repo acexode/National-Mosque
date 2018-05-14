@@ -32,8 +32,8 @@
     </ion-list>
     <ion-list no-lines class="lists">
         <h5>Support</h5>
-        <ion-item tappable *ngFor="let item of about" (click)="itemSelected(item.title)">
-            <h2>{{item.title}}</h2><br>
+        <ion-item tappable *ngFor="let item of about">
+            <a target="blank" href="{{item.action}}">{{item.title}}</a><br>
 
 
         </ion-item>
